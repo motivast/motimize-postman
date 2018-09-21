@@ -1,0 +1,417 @@
+{
+	"info": {
+		"_postman_id": "73ea464e-d518-48e1-8b35-f6b83d1d3192",
+		"name": "motimize",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Optimize synchronously with url",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d783c713-7644-4ea8-a57a-0d97f1587c4a",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.environment.set(\"id\", jsonData.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"type\": \"url\",\n\t\"wait\": \"true\",\n\t\"image\": \"https://via.placeholder.com/1000x1000.jpg\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/optimize",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"optimize"
+					]
+				},
+				"description": "Optimize synchronously with url"
+			},
+			"response": []
+		},
+		{
+			"name": "Optimize asynchronously with url",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "27c474d3-673d-4f6a-8d83-0f173c53fe2d",
+						"type": "text/javascript",
+						"exec": [
+							"var regex = /[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$/g;",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"var match = regex.exec(jsonData.resource);",
+							"",
+							"pm.environment.set(\"id\", match[0]);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"type\": \"url\",\n\t\"callback_url\": \"{{url}}\",\n\t\"image\": \"https://via.placeholder.com/1000x1000.jpg\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/optimize",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"optimize"
+					]
+				},
+				"description": "Optimize asynchronously with url"
+			},
+			"response": []
+		},
+		{
+			"name": "Optimize synchronously with base64",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d783c713-7644-4ea8-a57a-0d97f1587c4a",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.environment.set(\"id\", jsonData.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"type\": \"base64\",\n\t\"wait\": \"true\",\n\t\"image\": \"/9j/4AAQSkZJRgABAQEAYABgAAD//gA+Q1JFQVRPUjogZ2QtanBlZyB2MS4wICh1c2luZyBJSkcgSlBFRyB2NjIpLCBkZWZhdWx0IHF1YWxpdHkK/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8AAEQgAZABkAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A9MooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoopCQqlmIAAySe1AC0U0ugcIWUORkLnk0I6SDKMrDOMg5oAdRSEhVLMQABkk9qRnRCoZlBY4AJ60AOopqujlgrKSpwQD0p1ABRRRQAUUUUAFFFFABUF7H5tlMu3cdhwB644qeigDPu4pZFuIkVvMkZWRscAADv26H86kwzLO6JIgKKqgAg7hn/ABH5VcooApSRtLpcqyKzS7GyCD97np7Z6Ut0jF5QFYmSIIhAzhsn8uo/KrlFAFO1Rg8QKsDHEUckYy2R+fQ/nVyiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/Z\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/optimize",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"optimize"
+					]
+				},
+				"description": "Optimize synchronously with base64"
+			},
+			"response": []
+		},
+		{
+			"name": "Optimize asynchronously with base64 Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9480304f-41a1-4c3d-915d-54aa14c6d259",
+						"type": "text/javascript",
+						"exec": [
+							"var regex = /[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$/g;",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"var match = regex.exec(jsonData.resource);",
+							"",
+							"pm.environment.set(\"id\", match[0]);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"type\": \"base64\",\n\t\"callback_url\": \"{{url}}\",\n\t\"image\": \"/9j/4AAQSkZJRgABAQEAYABgAAD//gA+Q1JFQVRPUjogZ2QtanBlZyB2MS4wICh1c2luZyBJSkcgSlBFRyB2NjIpLCBkZWZhdWx0IHF1YWxpdHkK/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8AAEQgAZABkAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A9MooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoopCQqlmIAAySe1AC0U0ugcIWUORkLnk0I6SDKMrDOMg5oAdRSEhVLMQABkk9qRnRCoZlBY4AJ60AOopqujlgrKSpwQD0p1ABRRRQAUUUUAFFFFABUF7H5tlMu3cdhwB644qeigDPu4pZFuIkVvMkZWRscAADv26H86kwzLO6JIgKKqgAg7hn/ABH5VcooApSRtLpcqyKzS7GyCD97np7Z6Ut0jF5QFYmSIIhAzhsn8uo/KrlFAFO1Rg8QKsDHEUckYy2R+fQ/nVyiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/Z\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/optimize",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"optimize"
+					]
+				},
+				"description": "Optimize asynchronously with base64 Copy"
+			},
+			"response": []
+		},
+		{
+			"name": "Get image",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6956ab0c-d20c-4804-8c99-2d5b1595acbd",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{url}}/image/{{id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"image",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Download image",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6956ab0c-d20c-4804-8c99-2d5b1595acbd",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{url}}/image/{{id}}/download",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"image",
+						"{{id}}",
+						"download"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Download optimized image",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6956ab0c-d20c-4804-8c99-2d5b1595acbd",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{url}}/image/{{id}}/download?which=optimized",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"image",
+						"{{id}}",
+						"download"
+					],
+					"query": [
+						{
+							"key": "which",
+							"value": "optimized"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch optimized image with filename",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6956ab0c-d20c-4804-8c99-2d5b1595acbd",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"filename\": \"photo\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/image/{{id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"image",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch optimized image with url",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6956ab0c-d20c-4804-8c99-2d5b1595acbd",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"type\": \"url\",\n\t\"optimized_image\": \"https://images.unsplash.com/photo-1465126188505-4f04a0f23a4d\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/image/{{id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"image",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch optimized image with base64",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6956ab0c-d20c-4804-8c99-2d5b1595acbd",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"type\": \"base64\",\n\t\"optimized_image\": \"/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAABaAAD/7gAOQWRvYmUAZMAAAAAB/9sAhAABAQEBAQEBAQEBAgEBAQICAgEBAgICAgICAgICAwIDAwMDAgMDBAQEBAQDBQUFBQUFBwcHBwcICAgICAgICAgIAQEBAQICAgUDAwUHBQQFBwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAj/wAARCAABAAEDAREAAhEBAxEB/8QASgABAAAAAAAAAAAAAAAAAAAACgEBAAAAAAAAAAAAAAAAAAAAABABAAAAAAAAAAAAAAAAAAAAABEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AfwD/2Q==\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/image/{{id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"image",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "95fef87a-51ee-43e6-8fc8-8327f378b907",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "a41d1553-e3e0-4dfe-ae3d-fd72042acec2",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
